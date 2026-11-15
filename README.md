@@ -26,6 +26,8 @@ The follow-up instrumented the native F Prime output port. It measured two cycle
 
 A cycle-matched follow-up replayed the observed port output through two consumer policies. A persisted cycle watermark suppressed every repeated delivery in this ordered stream. With the same starting cycle and prior history, the faulted run with the affected replica still active delivered its first fresh correct output at cycle 202. The run that restored retirement and the fault-free control both delivered at cycle 200. [Matched replay method and data](docs/fprime-matched-replay.md).
 
+An opt-in one-tick boot check caught a fault that corrupted the check reply. It improved the first correct recorder result in that case, but across both tested conditions with fresh delivery it added one tick to the first fresh result accepted by the consumer. Both approaches withheld output for the fault that passed the check. [Boot check experiment](docs/fprime-boot-revalidation.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.

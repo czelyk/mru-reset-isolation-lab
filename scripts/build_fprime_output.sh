@@ -8,6 +8,9 @@ git -C "$src" fetch -q --depth 1 https://github.com/mruspace/flight.git "$commit
 git -C "$src" checkout -q --detach FETCH_HEAD
 git -C "$src" submodule update --init --recursive --depth 1
 python3 -B /instrument.py "$src"
+if [[ -f /instrument_boot.py ]]; then
+    python3 -B /instrument_boot.py "$src"
+fi
 {
     git -C "$src" rev-parse HEAD
     git -C "$src" submodule status --recursive

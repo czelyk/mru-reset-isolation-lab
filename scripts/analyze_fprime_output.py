@@ -12,7 +12,7 @@ STUCK = re.compile(r"^MRU_STUCK,(\d+),(\d+),1$", re.MULTILINE)
 RESTORED = re.compile(r"State restored: .*?, cycle (\d+)")
 
 
-def observe(trace, summary):
+def observe(trace, summary, *, allow_no_correct=False):
     text = trace.read_text(encoding="utf-8")
     ticks = FIRST_TICK.findall(text)
     results = [tuple(map(int, row)) for row in RESULT.findall(text)]
@@ -20,7 +20,7 @@ def observe(trace, summary):
     restored = RESTORED.findall(text)
     rows = dict(field.split("=", 1) for field in summary.read_text(encoding="utf-8").splitlines()[1].split())
     if (
-        len(ticks) != 1 or len(restored) != 1 or not results
+        len(ticks) != 1 or len(restored) != 1
         or len(faults) > 1
         or sum(row[2] for row in results) != int(rows["useful"])
         or sum(not row[2] for row in results) != int(rows["wrong"])
@@ -30,12 +30,13 @@ def observe(trace, summary):
         raise ValueError(f"Incomplete or inconsistent trace: {trace}")
     tick_ns = int(ticks[0])
     first_correct = next((row for row in results if row[2]), None)
-    if first_correct is None or tick_ns == 0 or first_correct[0] < tick_ns:
+    if tick_ns == 0 or (results and results[0][0] < tick_ns) or (first_correct is None and not allow_no_correct):
         raise ValueError(f"No correctly timed first output: {trace}")
     observation = {"restored_cycle": int(restored[0]), "correct": int(rows["useful"]),
                    "wrong": int(rows["wrong"]), "detected": int(rows["detected"]),
-                   "first_correct_cycle": first_correct[1],
-                   "first_tick_to_first_correct_ms": round((first_correct[0] - tick_ns) / 1e6, 3)}
+                   "first_correct_cycle": None if first_correct is None else first_correct[1],
+                   "first_tick_to_first_correct_ms": None if first_correct is None else
+                   round((first_correct[0] - tick_ns) / 1e6, 3)}
     if faults:
         at_ns, at_cycle = faults[0]
         first_after_fault = next((row for row in results if row[2] and row[1] >= at_cycle), None)
