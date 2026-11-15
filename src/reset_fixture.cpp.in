@@ -1,0 +1,112 @@
+#include <array>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+using U8 = unsigned char;
+using FwIndexType = unsigned;
+
+enum class RetireReason { WRONG, LOST, KNOWN_ANSWER_MISSING, PERIODIC_TEST_MISSING };
+struct SlotState { enum T : U8 { ACTIVE, STANDBY, RETIRED }; };
+struct KatPurpose { enum T { NONE, DIAGNOSIS }; };
+using Membership = std::array<SlotState::T, 3>;
+
+struct Reset {};
+
+class Manager {
+  public:
+    Manager(Membership& durable, const std::string& cut)
+        : m_slots(durable), m_durable(durable), m_cut(cut) {}
+
+    void retire(FwIndexType slot, RetireReason reason);
+
+    void retireWithDurableReport(FwIndexType slot) {
+        m_slots[slot] = SlotState::RETIRED;
+        m_expect[slot] = false;
+        m_katPurpose[slot] = KatPurpose::NONE;
+        ++m_retired;
+        enableOut_out(slot, false);
+        saveState();
+        log_WARNING_HI_ReplicaRetired(static_cast<U8>(slot), RetireReason::WRONG, m_cycle);
+    }
+
+    bool announced() const { return m_announced; }
+
+  private:
+    void checkReset(const std::string& stage) const {
+        if (m_cut == stage) {
+            throw Reset{};
+        }
+    }
+
+    void enableOut_out(FwIndexType, bool enabled) {
+        if (!enabled) {
+            checkReset("disable");
+        }
+    }
+
+    void log_WARNING_HI_ReplicaRetired(U8, RetireReason, unsigned) {
+        m_announced = true;
+        checkReset("retired_event");
+    }
+
+    void saveState() {
+        checkReset("before_commit");
+        m_durable = m_slots;
+        checkReset("after_commit");
+    }
+
+    [[maybe_unused]] void resetSilent(FwIndexType) {
+        throw std::logic_error("silence is outside the tested case");
+    }
+
+    Membership m_slots;
+    Membership& m_durable;
+    const std::string m_cut;
+    std::array<bool, 3> m_expect{true, true, true};
+    std::array<KatPurpose::T, 3> m_katPurpose{};
+    unsigned m_retired{};
+    unsigned m_cycle{202};
+    bool m_announced{};
+};
+
+/* EXTRACT_RETIRE */
+
+int main(int argc, char** argv) {
+    if (argc != 4) {
+        return 2;
+    }
+    const std::string ordering = argv[1];
+    const std::string cut = argv[2];
+    const std::string initial_mask = argv[3];
+    if (initial_mask != "7" && initial_mask != "6") {
+        return 2;
+    }
+
+    Membership durable{
+        initial_mask == "7" ? SlotState::ACTIVE : SlotState::RETIRED,
+        SlotState::ACTIVE,
+        SlotState::ACTIVE,
+    };
+    Manager manager(durable, cut);
+    bool reset = false;
+    try {
+        if (ordering == "upstream") {
+            manager.retire(1, RetireReason::WRONG);
+        } else if (ordering == "commit_then_report") {
+            manager.retireWithDurableReport(1);
+        } else {
+            return 2;
+        }
+    } catch (const Reset&) {
+        reset = true;
+    }
+
+    unsigned active = 0;
+    for (FwIndexType slot = 0; slot < durable.size(); ++slot) {
+        if (durable[slot] == SlotState::ACTIVE) {
+            active |= 1u << slot;
+        }
+    }
+    std::cout << reset << ',' << manager.announced() << ',' << active << '\n';
+}
