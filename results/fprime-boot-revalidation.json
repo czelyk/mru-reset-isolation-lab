@@ -1,0 +1,784 @@
+{
+  "boot-01": {
+    "cleared-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2012877754866,
+      "boot_replies": [],
+      "injected_reply_faults": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 1.668,
+      "cycles_without_result": 0,
+      "consumer": {
+        "accepted": 9,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.342
+      }
+    },
+    "cleared-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2016207663410,
+      "boot_replies": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 101.553,
+      "cycles_without_result": 0,
+      "consumer": {
+        "accepted": 9,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1100.58
+      }
+    },
+    "visible-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2019540610040,
+      "boot_replies": [],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          190,
+          1
+        ]
+      ],
+      "slot_1_retired_at": [
+        190
+      ],
+      "detected_disagreements": 1,
+      "first_correct_cycle": 192,
+      "first_tick_to_correct_ms": 200.17,
+      "cycles_without_result": 10,
+      "consumer": {
+        "accepted": 5,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.591
+      }
+    },
+    "visible-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2022874827459,
+      "boot_replies": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [
+        [
+          189,
+          1
+        ]
+      ],
+      "slot_1_retired_at": [
+        189
+      ],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 101.122,
+      "cycles_without_result": 9,
+      "consumer": {
+        "accepted": 5,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1100.259
+      }
+    },
+    "blind-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2026213091011,
+      "boot_replies": [],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          191,
+          0
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          193,
+          0
+        ],
+        [
+          194,
+          0
+        ],
+        [
+          195,
+          0
+        ],
+        [
+          196,
+          0
+        ],
+        [
+          197,
+          0
+        ],
+        [
+          198,
+          0
+        ],
+        [
+          199,
+          0
+        ],
+        [
+          200,
+          0
+        ],
+        [
+          201,
+          0
+        ],
+        [
+          202,
+          0
+        ],
+        [
+          203,
+          0
+        ],
+        [
+          204,
+          0
+        ],
+        [
+          205,
+          0
+        ],
+        [
+          206,
+          0
+        ],
+        [
+          207,
+          0
+        ],
+        [
+          208,
+          0
+        ],
+        [
+          209,
+          0
+        ],
+        [
+          210,
+          0
+        ],
+        [
+          211,
+          0
+        ],
+        [
+          212,
+          0
+        ],
+        [
+          213,
+          0
+        ],
+        [
+          214,
+          0
+        ],
+        [
+          215,
+          0
+        ],
+        [
+          216,
+          0
+        ],
+        [
+          217,
+          0
+        ],
+        [
+          218,
+          0
+        ]
+      ],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 28,
+      "first_correct_cycle": null,
+      "first_tick_to_correct_ms": null,
+      "cycles_without_result": 19,
+      "consumer": {
+        "accepted": 0,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": null,
+        "first_tick_to_fresh_correct_ms": null
+      }
+    },
+    "blind-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2029541842672,
+      "boot_replies": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          191,
+          0
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          193,
+          0
+        ],
+        [
+          194,
+          0
+        ],
+        [
+          195,
+          0
+        ],
+        [
+          196,
+          0
+        ],
+        [
+          197,
+          0
+        ],
+        [
+          198,
+          0
+        ],
+        [
+          199,
+          0
+        ],
+        [
+          200,
+          0
+        ],
+        [
+          201,
+          0
+        ],
+        [
+          202,
+          0
+        ],
+        [
+          203,
+          0
+        ],
+        [
+          204,
+          0
+        ],
+        [
+          205,
+          0
+        ],
+        [
+          206,
+          0
+        ],
+        [
+          207,
+          0
+        ],
+        [
+          208,
+          0
+        ],
+        [
+          209,
+          0
+        ],
+        [
+          210,
+          0
+        ],
+        [
+          211,
+          0
+        ],
+        [
+          212,
+          0
+        ],
+        [
+          213,
+          0
+        ],
+        [
+          214,
+          0
+        ],
+        [
+          215,
+          0
+        ],
+        [
+          216,
+          0
+        ],
+        [
+          217,
+          0
+        ]
+      ],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 27,
+      "first_correct_cycle": null,
+      "first_tick_to_correct_ms": null,
+      "cycles_without_result": 19,
+      "consumer": {
+        "accepted": 0,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": null,
+        "first_tick_to_fresh_correct_ms": null
+      }
+    }
+  },
+  "boot-02": {
+    "cleared-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2037254237889,
+      "boot_replies": [],
+      "injected_reply_faults": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 1.588,
+      "cycles_without_result": 0,
+      "consumer": {
+        "accepted": 9,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.865
+      }
+    },
+    "cleared-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2040581264109,
+      "boot_replies": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 101.539,
+      "cycles_without_result": 0,
+      "consumer": {
+        "accepted": 9,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1100.963
+      }
+    },
+    "visible-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2043910150571,
+      "boot_replies": [],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          190,
+          1
+        ]
+      ],
+      "slot_1_retired_at": [
+        190
+      ],
+      "detected_disagreements": 1,
+      "first_correct_cycle": 192,
+      "first_tick_to_correct_ms": 200.278,
+      "cycles_without_result": 10,
+      "consumer": {
+        "accepted": 5,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.233
+      }
+    },
+    "visible-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2047237718231,
+      "boot_replies": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [
+        [
+          189,
+          1
+        ]
+      ],
+      "slot_1_retired_at": [
+        189
+      ],
+      "detected_disagreements": 0,
+      "first_correct_cycle": 190,
+      "first_tick_to_correct_ms": 100.606,
+      "cycles_without_result": 9,
+      "consumer": {
+        "accepted": 5,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1100.269
+      }
+    },
+    "blind-ordinary": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2050575235089,
+      "boot_replies": [],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          191,
+          0
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          193,
+          0
+        ],
+        [
+          194,
+          0
+        ],
+        [
+          195,
+          0
+        ],
+        [
+          196,
+          0
+        ],
+        [
+          197,
+          0
+        ],
+        [
+          198,
+          0
+        ],
+        [
+          199,
+          0
+        ],
+        [
+          200,
+          0
+        ],
+        [
+          201,
+          0
+        ],
+        [
+          202,
+          0
+        ],
+        [
+          203,
+          0
+        ],
+        [
+          204,
+          0
+        ],
+        [
+          205,
+          0
+        ],
+        [
+          206,
+          0
+        ],
+        [
+          207,
+          0
+        ],
+        [
+          208,
+          0
+        ],
+        [
+          209,
+          0
+        ],
+        [
+          210,
+          0
+        ],
+        [
+          211,
+          0
+        ],
+        [
+          212,
+          0
+        ],
+        [
+          213,
+          0
+        ],
+        [
+          214,
+          0
+        ],
+        [
+          215,
+          0
+        ],
+        [
+          216,
+          0
+        ],
+        [
+          217,
+          0
+        ],
+        [
+          218,
+          0
+        ]
+      ],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 28,
+      "first_correct_cycle": null,
+      "first_tick_to_correct_ms": null,
+      "cycles_without_result": 19,
+      "consumer": {
+        "accepted": 0,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": null,
+        "first_tick_to_fresh_correct_ms": null
+      }
+    },
+    "blind-revalidate": {
+      "restored_cycle": 190,
+      "scheduled_ticks": 29,
+      "first_tick_ns": 2053905931304,
+      "boot_replies": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "injected_reply_faults": [
+        [
+          190,
+          0
+        ],
+        [
+          191,
+          0
+        ],
+        [
+          192,
+          0
+        ],
+        [
+          193,
+          0
+        ],
+        [
+          194,
+          0
+        ],
+        [
+          195,
+          0
+        ],
+        [
+          196,
+          0
+        ],
+        [
+          197,
+          0
+        ],
+        [
+          198,
+          0
+        ],
+        [
+          199,
+          0
+        ],
+        [
+          200,
+          0
+        ],
+        [
+          201,
+          0
+        ],
+        [
+          202,
+          0
+        ],
+        [
+          203,
+          0
+        ],
+        [
+          204,
+          0
+        ],
+        [
+          205,
+          0
+        ],
+        [
+          206,
+          0
+        ],
+        [
+          207,
+          0
+        ],
+        [
+          208,
+          0
+        ],
+        [
+          209,
+          0
+        ],
+        [
+          210,
+          0
+        ],
+        [
+          211,
+          0
+        ],
+        [
+          212,
+          0
+        ],
+        [
+          213,
+          0
+        ],
+        [
+          214,
+          0
+        ],
+        [
+          215,
+          0
+        ],
+        [
+          216,
+          0
+        ],
+        [
+          217,
+          0
+        ]
+      ],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 27,
+      "first_correct_cycle": null,
+      "first_tick_to_correct_ms": null,
+      "cycles_without_result": 19,
+      "consumer": {
+        "accepted": 0,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": null,
+        "first_tick_to_fresh_correct_ms": null
+      }
+    }
+  }
+}

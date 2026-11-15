@@ -1,0 +1,270 @@
+{
+  "matched-01": {
+    "history": {
+      "restored_cycle": 190,
+      "restored_slot_1": "active",
+      "period_ms": 100,
+      "sequence_status": "none",
+      "first_tick_ns": 1631483814605,
+      "stuck_markers": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0
+    },
+    "prior_cycles": [
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199
+    ],
+    "recovery": {
+      "active-fault": {
+        "restored_cycle": 190,
+        "restored_slot_1": "active",
+        "period_ms": 100,
+        "sequence_status": "ok",
+        "first_tick_ns": 1634840822806,
+        "stuck_markers": [
+          [
+            1635841367446,
+            200,
+            1
+          ]
+        ],
+        "slot_1_retired_at": [
+          200
+        ],
+        "detected_disagreements": 1,
+        "pass_through": {
+          "accepted": 19,
+          "accepted_repeated_cycles": [
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 202,
+          "first_tick_to_fresh_correct_ms": 1200.345
+        },
+        "persistent_high_water": {
+          "accepted": 9,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 202,
+          "first_tick_to_fresh_correct_ms": 1200.345
+        }
+      },
+      "retired-fault": {
+        "restored_cycle": 190,
+        "restored_slot_1": "retired",
+        "period_ms": 100,
+        "sequence_status": "ok",
+        "first_tick_ns": 1638246566289,
+        "stuck_markers": [],
+        "slot_1_retired_at": [],
+        "detected_disagreements": 0,
+        "pass_through": {
+          "accepted": 14,
+          "accepted_repeated_cycles": [
+            190,
+            192,
+            194,
+            196,
+            198
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.435
+        },
+        "persistent_high_water": {
+          "accepted": 9,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.435
+        }
+      },
+      "active-control": {
+        "restored_cycle": 190,
+        "restored_slot_1": "active",
+        "period_ms": 100,
+        "sequence_status": "none",
+        "first_tick_ns": 1641505562139,
+        "stuck_markers": [],
+        "slot_1_retired_at": [],
+        "detected_disagreements": 0,
+        "pass_through": {
+          "accepted": 29,
+          "accepted_repeated_cycles": [
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.615
+        },
+        "persistent_high_water": {
+          "accepted": 19,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.615
+        }
+      }
+    }
+  },
+  "matched-02": {
+    "history": {
+      "restored_cycle": 190,
+      "restored_slot_1": "active",
+      "period_ms": 100,
+      "sequence_status": "none",
+      "first_tick_ns": 1645944754563,
+      "stuck_markers": [],
+      "slot_1_retired_at": [],
+      "detected_disagreements": 0
+    },
+    "prior_cycles": [
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199
+    ],
+    "recovery": {
+      "active-fault": {
+        "restored_cycle": 190,
+        "restored_slot_1": "active",
+        "period_ms": 100,
+        "sequence_status": "ok",
+        "first_tick_ns": 1649314674180,
+        "stuck_markers": [
+          [
+            1650315176239,
+            200,
+            1
+          ]
+        ],
+        "slot_1_retired_at": [
+          200
+        ],
+        "detected_disagreements": 1,
+        "pass_through": {
+          "accepted": 18,
+          "accepted_repeated_cycles": [
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 202,
+          "first_tick_to_fresh_correct_ms": 1200.343
+        },
+        "persistent_high_water": {
+          "accepted": 8,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 202,
+          "first_tick_to_fresh_correct_ms": 1200.343
+        }
+      },
+      "retired-fault": {
+        "restored_cycle": 190,
+        "restored_slot_1": "retired",
+        "period_ms": 100,
+        "sequence_status": "ok",
+        "first_tick_ns": 1652608228326,
+        "stuck_markers": [],
+        "slot_1_retired_at": [],
+        "detected_disagreements": 0,
+        "pass_through": {
+          "accepted": 14,
+          "accepted_repeated_cycles": [
+            190,
+            192,
+            194,
+            196,
+            198
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.388
+        },
+        "persistent_high_water": {
+          "accepted": 9,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.388
+        }
+      },
+      "active-control": {
+        "restored_cycle": 190,
+        "restored_slot_1": "active",
+        "period_ms": 100,
+        "sequence_status": "none",
+        "first_tick_ns": 1655862350039,
+        "stuck_markers": [],
+        "slot_1_retired_at": [],
+        "detected_disagreements": 0,
+        "pass_through": {
+          "accepted": 29,
+          "accepted_repeated_cycles": [
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199
+          ],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.576
+        },
+        "persistent_high_water": {
+          "accepted": 19,
+          "accepted_repeated_cycles": [],
+          "accepted_wrong": 0,
+          "first_fresh_correct_cycle": 200,
+          "first_tick_to_fresh_correct_ms": 1000.576
+        }
+      }
+    }
+  }
+}
