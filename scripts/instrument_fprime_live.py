@@ -3,7 +3,7 @@
 import argparse
 from pathlib import Path
 
-from instrument import rewrite
+from instrument import CLOCK, rewrite
 
 
 def instrument(source):
@@ -47,6 +47,33 @@ def instrument(source):
         ("    if (marker != nullptr && access(marker, F_OK) == 0) {", r'''    const char* const minimum = std::getenv("MRU_LAB_FIRST_FAULT_CYCLE");
     if (marker != nullptr && access(marker, F_OK) == 0 &&
         (minimum == nullptr || cycle >= std::strtoull(minimum, nullptr, 10))) {'''),
+    ])
+    rewrite(mru / "Components/RedundancyManager/RedundancyManager.cpp", [
+        ("\nnamespace Mru {", "\n#include <cstdlib>\n#include <unistd.h>\n" + CLOCK + "\nnamespace Mru {"),
+        ("    }\n\n    this->m_cycle = this->m_nextCycle;", r'''        const char* const directory = std::getenv("MRU_LAB_LATEST");
+        if (this->m_restored && directory != nullptr) {
+            const auto start = traceMonotonicNs();
+            const auto original = static_cast<unsigned long long>(this->m_nextCycle);
+            auto selected = original;
+            // The harness publishes contiguous immutable sample files in order.
+            char path[1024];
+            for (;;) {
+                const int length = std::snprintf(path, sizeof(path), "%s/%llu", directory, selected + 1);
+                if (length < 0 || static_cast<size_t>(length) >= sizeof(path)) {
+                    std::abort();
+                }
+                if (access(path, F_OK) != 0) {
+                    break;
+                }
+                ++selected;
+            }
+            this->m_nextCycle = selected;
+            std::fprintf(stderr, "MRU_LATEST,%llu,%llu,%llu,%llu\n", original, selected,
+                         start, traceMonotonicNs());
+        }
+    }
+
+    this->m_cycle = this->m_nextCycle;'''),
     ])
 
 

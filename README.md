@@ -32,6 +32,8 @@ A replica-side fixture kept the same fault state across a real Linux manager pro
 
 The live receiver kept a separate sample timestamp through 60 manager restarts. With the 500 ms age check, it accepted a first usable result in 18 of 20 one-cycle rollback runs and none of the 40 deeper rollback runs. With a fault delayed until cycle 200, preserved isolation advanced the first usable result by roughly two cycles in both workloads at the shallow rollback point. [Live receiver experiment](docs/fprime-live-freshness.md).
 
+With replaceable samples, starting from the most recent published input provided usable output in all 36 main runs. Replaying the checkpoint delivered usable output in 12 of 36. The newer-input policy skipped three or four previously unseen sequence IDs. [Latest-sample comparison](docs/fprime-latest-sample.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.

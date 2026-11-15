@@ -2,7 +2,7 @@
 
 **Current selection decision: hold.** The repository supports bounded verification on one flight-derived manager with controlled workloads. The tested configurations do not yet establish a transferable design result. This internal assessment is pending an independent skeptical review and the author's own reproduction and interpretation.
 
-The subsequent [live receiver experiment](fprime-live-freshness.md) confirms a two-cycle benefit for delayed fault manifestation with shallow rollback on two payload calculations. It also shows no usable delivery after deeper rollback at the same producer and manager rate. Both payloads share the same manager schedule. Transfer beyond this schedule and comparison with a latest-sample restart remain open.
+The subsequent [live receiver experiment](fprime-live-freshness.md) confirms a two-cycle benefit for delayed fault manifestation with shallow rollback on two payload calculations. It also shows no usable delivery after deeper rollback at the same producer and manager rate. A [latest-sample restart](fprime-latest-sample.md) restored usable delivery in all 36 main runs, against 12 of 36 for checkpoint replay. It skipped three or four unaccepted inputs. Preserved isolation gave a two-cycle gain in the two phase-test pairs matched at an even selected cycle. Both payloads use the same manager schedule. For replaceable inputs, the evidence favors advancing the cursor to address stale delivery. Continuing as a research candidate requires a documented consumer for which skipped samples have a measurable cost or a result that transfers beyond this schedule.
 
 ## Spacecraft relevance and closest prior work
 
