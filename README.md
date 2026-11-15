@@ -34,6 +34,8 @@ The live receiver kept a separate sample timestamp through 60 manager restarts. 
 
 With replaceable samples, starting from the most recent published input provided usable output in all 36 main runs. Replaying the checkpoint delivered usable output in 12 of 36. The newer-input policy skipped three or four previously unseen sequence IDs. [Latest-sample comparison](docs/fprime-latest-sample.md).
 
+For a stateful consumer, the same skip can silently change the estimate. The original Basilisk delta-v accumulator ran on captured three-axis F Prime results. With varying acceleration, the latest-sample policy with single-sample intake reached no timely, numerically correct estimate in 12 runs. Replaying from a trusted eight-sample window restored correctness in all 12 using recorded receipt times. [Stateful consumer experiment](docs/fprime-stateful-dv.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.

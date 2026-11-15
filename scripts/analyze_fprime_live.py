@@ -6,7 +6,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from run_fprime_live import CASES, FIELDS, MAX_AGE_NS, expected_hash
+from run_fprime_live import CASES, FIELDS, MAX_AGE_NS, expected_sample_value
 
 
 def read_rows(path):
@@ -36,7 +36,7 @@ def audit_case(directory):
         age = received - origin
         accepted_order = cycle > last_order
         decision = "old-id" if cycle <= last_live else "stale-source" if age > MAX_AGE_NS else "accepted"
-        expected = expected_hash(values[0]) if result["workload"] == "hash" else sorted(values)[1]
+        expected = expected_sample_value(result["workload"], values)
         if (
             int(row["source_ns"]) != origin or not origin <= port <= received or int(row["age_ns"]) != age
             or int(row["expected"]) != expected or int(row["correct"]) != (int(row["value"]) == expected)

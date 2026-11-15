@@ -49,17 +49,29 @@ def expected_hash(value):
     return digest
 
 
-def input_values(cycle):
+def expected_sample_value(workload, values):
+    if workload == "hash":
+        return expected_hash(values[0])
+    if workload == "median":
+        return sorted(values)[1]
+    if workload in ("imu", "imu-constant"):
+        return sum(value << (10 * axis) for axis, value in enumerate(values))
+    raise ValueError(f"Unknown workload: {workload}")
+
+
+def input_values(cycle, workload):
+    if workload == "imu-constant":
+        return (125, 250, 375)
     return (37 * cycle % 509, 91 * cycle % 673, 183 * cycle % 587)
 
 
-def publish_samples(directory, start_cycle, samples, published, ready, stop):
+def publish_samples(directory, start_cycle, workload, samples, published, ready, stop):
     deadline = time.monotonic_ns()
     cycle = start_cycle
     while not stop.is_set():
         if stop.wait(max(0, deadline - time.monotonic_ns()) / 1e9):
             return
-        values = input_values(cycle)
+        values = input_values(cycle, workload)
         temporary = directory / "next"
         temporary.write_text(" ".join(map(str, values)), encoding="ascii")
         samples[cycle] = (time.monotonic_ns(), values)
@@ -97,7 +109,7 @@ class Consumer:
         else:
             decision = "accepted"
             self.last_live = cycle
-        expected = expected_hash(values[0]) if self.workload == "hash" else sorted(values)[1]
+        expected = expected_sample_value(self.workload, values)
         # The oracle scores the decision. Neither policy uses it to accept or reject.
         self.rows.append(dict(zip(FIELDS, (phase, cycle, source_ns, port_ns, receive_ns, age, value,
                                           expected, int(value == expected), int(order), decision))))
@@ -187,7 +199,8 @@ def run_case(flight, directory, start_cycle, workload, case, policy="checkpoint"
         env.pop("MRU_LAB_LATEST", None)
         samples, published = {}, {}
         ready, stop = threading.Event(), threading.Event()
-        producer = threading.Thread(target=publish_samples, args=(source, start_cycle, samples, published, ready, stop))
+        producer = threading.Thread(target=publish_samples,
+                                    args=(source, start_cycle, workload, samples, published, ready, stop))
         consumer = Consumer(workload, samples)
         producer.start()
         try:
@@ -262,7 +275,8 @@ def main():
     parser.add_argument("flight", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--cycles", type=int, nargs="+", default=[190, 198, 199], choices=range(190, 200))
-    parser.add_argument("--workloads", nargs="+", choices=["hash", "median"], default=["hash", "median"])
+    parser.add_argument("--workloads", nargs="+", choices=["hash", "median", "imu", "imu-constant"],
+                        default=["hash", "median"])
     parser.add_argument("--cases", nargs="+", choices=CASES, default=list(CASES))
     parser.add_argument("--policies", nargs="+", choices=["checkpoint", "latest"], default=["checkpoint"])
     parser.add_argument("--restart-delay-ms", type=int, choices=[0, 100], default=0,

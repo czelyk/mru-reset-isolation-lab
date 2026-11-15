@@ -34,6 +34,9 @@ def instrument(source):
             std::sort(values.begin(), values.end());
             return values[1];
         }
+        if (workload != nullptr && workload[0] == 'i') {
+            return values[0] | (values[1] << 10) | (values[2] << 20);
+        }
         input = values[0];
     }
     U64 s = (input * FILL_MULTIPLIER) + 1;'''),
