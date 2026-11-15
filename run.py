@@ -50,6 +50,47 @@ def check_reset_cases(binaries):
     return rows
 
 
+def build_voter(rustc):
+    library = BUILD / "libquorum.rlib"
+    binary = BUILD / "vote-probe.exe"
+    subprocess.run([rustc, "--edition=2021", "--crate-name", "quorum", "--crate-type=rlib",
+                    str(ROOT / "upstream" / "quorum.rs"), "-o", str(library)], check=True, cwd=BUILD)
+    subprocess.run([rustc, "--edition=2021", "--extern", f"quorum={library}",
+                    str(ROOT / "src" / "vote_probe.rs"), "-o", str(binary)], check=True, cwd=BUILD)
+    return binary
+
+
+def check_voter_cases(binaries, voter):
+    # These outcomes follow from agreeing healthy replies, one disagreeing reply,
+    # and the documented quorum modes. They are checked against the original Rust voter.
+    expected_modes = {7: "Vote", 6: "Compare", 5: "Compare", 4: "SelfCheck"}
+    rows = []
+    for snapshot, binary in binaries.items():
+        for ordering in ORDERINGS:
+            for cut in CUTS:
+                for initial_mask in (7, 6):
+                    result = reset_case(binary, ordering, cut, initial_mask)
+                    restored_mask = result["restored_active_mask"]
+                    after_commit = {"after_commit", "none"}
+                    if ordering == "commit_then_report":
+                        after_commit.add("retired_event")
+                    expected_mask = initial_mask & ~2 if cut in after_commit else initial_mask
+                    if expected_mask != restored_mask:
+                        raise AssertionError((snapshot, ordering, cut, initial_mask, result))
+                    for fault in ("persist", "clear"):
+                        raw = subprocess.check_output([str(voter), str(restored_mask), fault], text=True)
+                        mode, output, diagnose = raw.strip().split(",")
+                        disagreement = expected_mask == 6 and fault == "persist"
+                        expected = (expected_modes[expected_mask],
+                                    "withheld" if disagreement else "correct", str(int(disagreement)))
+                        if (mode, output, diagnose) != expected:
+                            raise AssertionError((snapshot, ordering, cut, initial_mask, fault, raw))
+                        rows.append({"snapshot": snapshot, "ordering": ordering, "cut": cut,
+                                     "initial_active_mask": initial_mask, **result, "fault": fault,
+                                     "mode": mode, "output": output, "diagnose": int(diagnose)})
+    return rows
+
+
 def write_csv(name, rows):
     with (BUILD / name).open("w", encoding="utf-8", newline="") as output:
         writer = csv.DictWriter(output, fieldnames=list(rows[0]), lineterminator="\n")
@@ -58,14 +99,22 @@ def write_csv(name, rows):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run the Mru replica reset-order experiment.")
+    parser = argparse.ArgumentParser(description="Run the Mru reset and voter experiments.")
     parser.add_argument("--cxx", nargs="+", default=["c++"], help="Compiler command, for example zig c++")
+    parser.add_argument("--rustc", default="rustc", help="Path to the Rust compiler")
+    parser.add_argument("--verify", action="store_true", help="Compare all generated rows to results/")
     args = parser.parse_args()
     BUILD.mkdir(exist_ok=True)
     binaries = {snapshot: build_reset_fixture(snapshot, args.cxx) for snapshot in SNAPSHOTS}
-    rows = check_reset_cases(binaries)
-    write_csv("reset-order.csv", rows)
-    print(f"{len(rows)} reset-order cases passed.")
+    results = {
+        "reset-order.csv": check_reset_cases(binaries),
+        "voter-output.csv": check_voter_cases(binaries, build_voter(args.rustc)),
+    }
+    for name, rows in results.items():
+        write_csv(name, rows)
+        if args.verify and (BUILD / name).read_bytes() != (ROOT / "results" / name).read_bytes():
+            raise SystemExit(f"{name} differs from the recorded result.")
+        print(f"{len(rows)} cases passed in {name}.")
 
 
 if __name__ == "__main__":

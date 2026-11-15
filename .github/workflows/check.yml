@@ -1,0 +1,21 @@
+name: Replay reset and vote experiments
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Select Rust compiler
+        run: rustup toolchain install 1.96.0 --profile minimal
+      - name: Replay and compare recorded results
+        run: |
+          rustup run 1.96.0 rustc --version
+          rustup run 1.96.0 python -B run.py --cxx g++ --verify
