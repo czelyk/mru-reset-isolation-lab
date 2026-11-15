@@ -24,6 +24,8 @@ The unmodified F Prime ARM binaries restored a valid old checkpoint when their s
 
 The follow-up instrumented the native F Prime output port. It measured two cycles from fault injection to correct output and observed repeated correct cycle IDs after a pre-commit restart. [Timing experiment and data](docs/fprime-output-timing.md).
 
+A cycle-matched follow-up replayed the observed port output through two consumer policies. A persisted cycle watermark suppressed every repeated delivery in this ordered stream. With the same starting cycle and prior history, the faulted run with the affected replica still active delivered its first fresh correct output at cycle 202. The run that restored retirement and the fault-free control both delivered at cycle 200. [Matched replay method and data](docs/fprime-matched-replay.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.
