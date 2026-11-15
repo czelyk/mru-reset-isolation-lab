@@ -17,6 +17,11 @@ The C++ fixture executes Mru's retirement function from two pinned snapshots. An
 
 A follow-up runs the original voter across 24 modeled restart scenarios. When the same diagnostic detects a persistent fault and completes within a cycle, boot revalidation and ordinary resume deliver the first correct output on the same cycle. After a fault clears, revalidation delays the first correct output by one cycle if the decision to retire the slot had not committed. When the diagnostic misses a persistent fault, both policies withhold correct output throughout the six-cycle observation window. [Scenario results](results/recovery-summary.csv) · [Cycle traces](results/recovery-trace.csv)
 
+
+## Integrated F Prime test
+
+The unmodified F Prime ARM binaries restored a valid old checkpoint when their save was interrupted. The next run restored the previously retired replica to the active set, and replaying the same fault produced a detected disagreement at cycle 200. The post-commit control retained isolation. See [the integrated test method](docs/method.md#integrated-f-prime-process-restart) and [recorded observations](results/fprime-reset-observations.json).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.
