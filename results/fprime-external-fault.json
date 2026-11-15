@@ -1,0 +1,254 @@
+{
+  "external-matched-01": {
+    "retained": {
+      "marker_before_kill": "85:298359",
+      "marker_before_start": "85:298359",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "active",
+      "replica_pid_cycle_and_check_before": [
+        [
+          13,
+          200,
+          0
+        ],
+        [
+          13,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [
+        [
+          195,
+          190,
+          0
+        ],
+        [
+          195,
+          190,
+          1
+        ]
+      ],
+      "slot_1_retired_after_at": [
+        190
+      ],
+      "first_tick_ns": 2349879250969,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 14,
+        "wrong": 0,
+        "detected": 1,
+        "first_correct_cycle": 192,
+        "first_tick_to_first_correct_ms": 200.031
+      },
+      "consumer": {
+        "accepted": 10,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.478
+      }
+    },
+    "cleared": {
+      "marker_before_kill": "85:298361",
+      "marker_before_start": "absent",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "active",
+      "replica_pid_cycle_and_check_before": [
+        [
+          235,
+          200,
+          0
+        ],
+        [
+          235,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [],
+      "slot_1_retired_after_at": [],
+      "first_tick_ns": 2354413897984,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 29,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 1.437
+      },
+      "consumer": {
+        "accepted": 19,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.928
+      }
+    },
+    "retired": {
+      "marker_before_kill": "85:298362",
+      "marker_before_start": "85:298362",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "retired",
+      "replica_pid_cycle_and_check_before": [
+        [
+          446,
+          200,
+          0
+        ],
+        [
+          446,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [],
+      "slot_1_retired_after_at": [],
+      "first_tick_ns": 2358949709012,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 15,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 1.295
+      },
+      "consumer": {
+        "accepted": 10,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.399
+      }
+    }
+  },
+  "external-matched-02": {
+    "retained": {
+      "marker_before_kill": "85:298359",
+      "marker_before_start": "85:298359",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "active",
+      "replica_pid_cycle_and_check_before": [
+        [
+          14,
+          200,
+          0
+        ],
+        [
+          14,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [
+        [
+          193,
+          190,
+          0
+        ],
+        [
+          193,
+          190,
+          1
+        ]
+      ],
+      "slot_1_retired_after_at": [
+        190
+      ],
+      "first_tick_ns": 2364093588296,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 14,
+        "wrong": 0,
+        "detected": 1,
+        "first_correct_cycle": 192,
+        "first_tick_to_first_correct_ms": 199.893
+      },
+      "consumer": {
+        "accepted": 10,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.276
+      }
+    },
+    "cleared": {
+      "marker_before_kill": "85:298361",
+      "marker_before_start": "absent",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "active",
+      "replica_pid_cycle_and_check_before": [
+        [
+          232,
+          200,
+          0
+        ],
+        [
+          232,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [],
+      "slot_1_retired_after_at": [],
+      "first_tick_ns": 2368604718849,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 29,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 1.689
+      },
+      "consumer": {
+        "accepted": 19,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.732
+      }
+    },
+    "retired": {
+      "marker_before_kill": "85:298362",
+      "marker_before_start": "85:298362",
+      "manager_exit": 137,
+      "checkpoint_equal_to_active_seed": true,
+      "restored_slot_1": "retired",
+      "replica_pid_cycle_and_check_before": [
+        [
+          456,
+          200,
+          0
+        ],
+        [
+          456,
+          200,
+          1
+        ]
+      ],
+      "replica_pid_cycle_and_check_after": [],
+      "slot_1_retired_after_at": [],
+      "first_tick_ns": 2373156092600,
+      "recorder": {
+        "restored_cycle": 190,
+        "correct": 15,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 3.094
+      },
+      "consumer": {
+        "accepted": 10,
+        "accepted_repeated_cycles": [],
+        "accepted_wrong": 0,
+        "first_fresh_correct_cycle": 200,
+        "first_tick_to_fresh_correct_ms": 1000.505
+      }
+    }
+  }
+}
