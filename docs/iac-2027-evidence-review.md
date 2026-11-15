@@ -1,6 +1,8 @@
 # IAC 2027 evidence review
 
-**Current selection decision: hold.** The repository supports a bounded verification case on one flight-derived workload. The tested configurations do not yet establish a transferable design result. This internal assessment is pending an independent skeptical review and the author's own reproduction and interpretation.
+**Current selection decision: hold.** The repository supports bounded verification on one flight-derived manager with controlled workloads. The tested configurations do not yet establish a transferable design result. This internal assessment is pending an independent skeptical review and the author's own reproduction and interpretation.
+
+The subsequent [live receiver experiment](fprime-live-freshness.md) confirms a two-cycle benefit for delayed fault manifestation with shallow rollback on two payload calculations. It also shows no usable delivery after deeper rollback at the same producer and manager rate. Both payloads share the same manager schedule. Transfer beyond this schedule and comparison with a latest-sample restart remain open.
 
 ## Spacecraft relevance and closest prior work
 

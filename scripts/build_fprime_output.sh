@@ -14,6 +14,9 @@ fi
 if [[ -f /instrument_replica.py ]]; then
     python3 -B /instrument_replica.py "$src"
 fi
+if [[ -f /instrument_live.py ]]; then
+    python3 -B /instrument_live.py "$src"
+fi
 {
     git -C "$src" rev-parse HEAD
     git -C "$src" submodule status --recursive

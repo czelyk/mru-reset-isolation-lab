@@ -30,6 +30,8 @@ An opt-in one-tick boot check caught a fault that corrupted the check reply. It 
 
 A replica-side fixture kept the same fault state across a real Linux manager process kill. Ordinary recovery retired the re-admitted faulty replica and reached the first fresh correct cycle on the same tick as the cleared and already-retired comparators. The recorder alone showed a two-cycle difference. [External fault experiment](docs/fprime-external-replica-fault.md).
 
+The live receiver kept a separate sample timestamp through 60 manager restarts. With the 500 ms age check, it accepted a first usable result in 18 of 20 one-cycle rollback runs and none of the 40 deeper rollback runs. With a fault delayed until cycle 200, preserved isolation advanced the first usable result by roughly two cycles in both workloads at the shallow rollback point. [Live receiver experiment](docs/fprime-live-freshness.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.
