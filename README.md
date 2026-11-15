@@ -36,6 +36,8 @@ With replaceable samples, starting from the most recent published input provided
 
 For a stateful consumer, the same skip can silently change the estimate. The original Basilisk delta-v accumulator ran on captured three-axis F Prime results. With varying acceleration, the latest-sample policy with single-sample intake reached no timely, numerically correct estimate in 12 runs. Replaying from a trusted eight-sample window restored correctness in all 12 using recorded receipt times. [Stateful consumer experiment](docs/fprime-stateful-dv.md).
 
+The flight archive follow-up compared the history-based approach with the cumulative values already transmitted by Spirit and Opportunity. The cumulative representation preserved the reference change across all tested same-epoch losses. Four reset-like discontinuities require an independent epoch reference. [MER baseline and research decision](docs/mer-cumulative-dv-baseline.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.

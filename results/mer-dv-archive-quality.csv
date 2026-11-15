@@ -1,0 +1,3 @@
+rover,original_rows,repeated_timestamps,incomplete_rows,missing_timestamps,conflicting_timestamps,kept_timestamps,reset_like_boundaries
+Opportunity,9050,1647,9,0,2,7401,2
+Spirit,9176,44,0,0,0,9132,2
