@@ -4,6 +4,8 @@ import re
 import subprocess
 from pathlib import Path
 
+from src.recovery import check_recovery_cases
+
 ROOT = Path(__file__).resolve().parent
 BUILD = ROOT / "build"
 SNAPSHOTS = ("bbdad54", "b885359")
@@ -60,6 +62,11 @@ def build_voter(rustc):
     return binary
 
 
+def vote_case(voter, mask, fault):
+    raw = subprocess.check_output([str(voter), str(mask), fault], text=True)
+    return tuple(raw.strip().split(","))
+
+
 def check_voter_cases(binaries, voter):
     # These outcomes follow from agreeing healthy replies, one disagreeing reply,
     # and the documented quorum modes. They are checked against the original Rust voter.
@@ -78,13 +85,12 @@ def check_voter_cases(binaries, voter):
                     if expected_mask != restored_mask:
                         raise AssertionError((snapshot, ordering, cut, initial_mask, result))
                     for fault in ("persist", "clear"):
-                        raw = subprocess.check_output([str(voter), str(restored_mask), fault], text=True)
-                        mode, output, diagnose = raw.strip().split(",")
+                        mode, output, diagnose = vote_case(voter, restored_mask, fault)
                         disagreement = expected_mask == 6 and fault == "persist"
                         expected = (expected_modes[expected_mask],
                                     "withheld" if disagreement else "correct", str(int(disagreement)))
                         if (mode, output, diagnose) != expected:
-                            raise AssertionError((snapshot, ordering, cut, initial_mask, fault, raw))
+                            raise AssertionError((snapshot, ordering, cut, initial_mask, fault, mode, output, diagnose))
                         rows.append({"snapshot": snapshot, "ordering": ordering, "cut": cut,
                                      "initial_active_mask": initial_mask, **result, "fault": fault,
                                      "mode": mode, "output": output, "diagnose": int(diagnose)})
@@ -106,15 +112,23 @@ def main():
     args = parser.parse_args()
     BUILD.mkdir(exist_ok=True)
     binaries = {snapshot: build_reset_fixture(snapshot, args.cxx) for snapshot in SNAPSHOTS}
+    voter = build_voter(args.rustc)
+    restores = {
+        cut: reset_case(binaries["bbdad54"], "upstream", cut, 6)["restored_active_mask"]
+        for cut in ("before_commit", "after_commit")
+    }
+    summary, traces = check_recovery_cases(restores, lambda mask, fault: vote_case(voter, mask, fault))
     results = {
         "reset-order.csv": check_reset_cases(binaries),
-        "voter-output.csv": check_voter_cases(binaries, build_voter(args.rustc)),
+        "voter-output.csv": check_voter_cases(binaries, voter),
+        "recovery-summary.csv": summary,
+        "recovery-trace.csv": traces,
     }
     for name, rows in results.items():
         write_csv(name, rows)
         if args.verify and (BUILD / name).read_bytes() != (ROOT / "results" / name).read_bytes():
             raise SystemExit(f"{name} differs from the recorded result.")
-        print(f"{len(rows)} cases passed in {name}.")
+        print(f"{len(rows)} rows verified in {name}.")
 
 
 if __name__ == "__main__":

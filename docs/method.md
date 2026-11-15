@@ -23,3 +23,20 @@ The 80 deterministic cases cover two source snapshots, two retirement orders, fi
 All corresponding cases with two healthy replicas available returned the correct value, and all cleared-fault controls returned the correct value. None of the 80 cases delivered an incorrect value. The rows are deliberately chosen combinations across two versions. Their counts are test coverage, with no probability interpretation. The comparator changes when retirement is announced. It cannot persist the decision when the reset happens before the commit.
 
 Windows replay used Python 3.12.10, Zig 0.14.1 and Rust 1.96.0. The next research gate is physical or integrated evidence that the fault and reset combination occurs in a representative avionics topology, and measurement of time to first correct output versus boot-time revalidation. [Mru decision core](https://github.com/mruspace/flight/blob/bbdad5436e0a699c07a08d07215e0122132602cf/quorum/src/lib.rs#L83-L139)
+
+## Recovery across consecutive cycles
+
+This replay starts with slot 0 already retired and uses the flown snapshot's C++ retirement body to obtain two checkpoints. A reset before the commit restores slots 1 and 2 as active. A reset after the commit restores only healthy slot 2. The replay calls the original Mru voter on each modeled compute cycle and uses the manager's even-cycle cadence for single-replica self-checks. It starts at cycle 303, the cycle in the published restart record, and at adjacent cycle 302 as a parity control. Every run spans six cycles starting at offset 0. The horizon is a test choice. [Flown manager](https://github.com/mruspace/flight/blob/bbdad5436e0a699c07a08d07215e0122132602cf/fprime/Mru/Components/RedundancyManager/RedundancyManager.cpp#L340-L404)
+
+The resume baseline uses the restored membership immediately. When the voter requests diagnosis, the replay models the known-answer checks completing before the next cycle. The boot revalidation baseline spends the first cycle validating only the questionable, still-eligible slot. Both use the same stipulated diagnostic coverage. One fault survives restart and fails that check. A second fault survives and passes the check while disagreeing on the normal workload. A cleared-fault control agrees on normal outputs and passes the check. The diagnostic is a scripted result. The replay does not execute the real F Prime ports, diagnostic routing, storage, scheduler or power reset. [Mru voter and diagnosis flag](https://github.com/mruspace/flight/blob/bbdad5436e0a699c07a08d07215e0122132602cf/quorum/src/lib.rs#L94-L139)
+
+| Restored checkpoint | Fault | Resume | Boot revalidation |
+| --- | --- | --- | --- |
+| Before commit | Cleared | 0 / 0 | 1 / 1 |
+| Before commit | Persistent and detected | 2 / 1 | 2 / 1 |
+| Before commit | Persistent and missed | None in six cycles | None in six cycles |
+| After commit | Any of the tested faults | 0 / 1 | 0 / 1 |
+
+Values are cycles to the first correct output for starts at cycle 302 and cycle 303, respectively. Across 24 scenarios and 144 trace rows there were no wrong outputs. With a detectable persistent fault, the ordinary voter withheld a cycle before diagnosis. Boot revalidation substituted a boot-test cycle without advancing the first correct result under these delivery assumptions. With a cleared fault, boot revalidation cost one cycle before the commit; after the commit the retired slot was already excluded and no boot test was scheduled.
+
+This test makes diagnostic coverage and actual completion phase the next hardware measurements. Measure when a real known-answer test responds and whether it covers a persistent normal-workload fault. The equal first-output result relies on both diagnostics completing within the modeled cycle. None of these cases estimates wall-clock recovery time or field fault coverage.
