@@ -28,6 +28,8 @@ A cycle-matched follow-up replayed the observed port output through two consumer
 
 An opt-in one-tick boot check caught a fault that corrupted the check reply. It improved the first correct recorder result in that case, but across both tested conditions with fresh delivery it added one tick to the first fresh result accepted by the consumer. Both approaches withheld output for the fault that passed the check. [Boot check experiment](docs/fprime-boot-revalidation.md).
 
+A replica-side fixture kept the same fault state across a real Linux manager process kill. Ordinary recovery retired the re-admitted faulty replica and reached the first fresh correct cycle on the same tick as the cleared and already-retired comparators. The recorder alone showed a two-cycle difference. [External fault experiment](docs/fprime-external-replica-fault.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.
