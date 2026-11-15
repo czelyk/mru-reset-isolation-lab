@@ -22,6 +22,8 @@ A follow-up runs the original voter across 24 modeled restart scenarios. When th
 
 The unmodified F Prime ARM binaries restored a valid old checkpoint when their save was interrupted. The next run restored the previously retired replica to the active set, and replaying the same fault produced a detected disagreement at cycle 200. The post-commit control retained isolation. See [the integrated test method](docs/method.md#integrated-f-prime-process-restart) and [recorded observations](results/fprime-reset-observations.json).
 
+The follow-up instrumented the native F Prime output port. It measured two cycles from fault injection to correct output and observed repeated correct cycle IDs after a pre-commit restart. [Timing experiment and data](docs/fprime-output-timing.md).
+
 ## Reproduce
 
 Prerequisites are Python 3.9+, a C++17 compiler and Rust 1.96.0 (the version used for the checked-in results). No package dependencies or credentials are needed.

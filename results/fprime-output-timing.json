@@ -1,0 +1,92 @@
+{
+  "platform": "Linux x86_64 container on Windows Docker Desktop",
+  "build_image": "sha256:8c194b33cbde940aaea9a175855f3258e63e14bf40c5b41da3609a2746ba067b",
+  "build_provenance": [
+    "bbdad5436e0a699c07a08d07215e0122132602cf",
+    " 558b7ef48edd5d25f3bdddcbbe7afddb9cc22d09 fprime/lib/fprime (558b7ef)",
+    " 58d77fa8070e8cec2dc1ed015d66b454c8d78850 fprime/lib/fprime/googletest (58d77fa)",
+    "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+    "g++ (Debian 12.2.0-14+deb12u1) 12.2.0",
+    "cmake version 3.26.0"
+  ],
+  "artifacts_sha256": {
+    "MruQuorum": "f8e597ad01de927adc10199854f6d565337c004d099ec9f831cc36ba8293ead2",
+    "MruReplica": "848ef9a2a65f4fc96c23875f152e2ed5c6f3bee07e376cdc93f16c1bcef5613d",
+    "restart.bin": "4d11c45ac9a1a898feb02d6157092d80abe4c60d64898f9a7cd16edb69767755"
+  },
+  "configured_voter_cycle_ms": 100,
+  "runs": [
+    {
+      "trial": 1,
+      "precommit": {
+        "restored_cycle": 190,
+        "correct": 18,
+        "wrong": 0,
+        "detected": 1,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 2.119,
+        "fault_cycle": 200,
+        "output_at_fault_cycle": null,
+        "first_correct_after_fault_cycle": 202,
+        "fault_to_first_correct_ms": 199.786,
+        "replayed_correct_cycles": [
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199
+        ]
+      },
+      "postcommit": {
+        "restored_cycle": 201,
+        "correct": 14,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 202,
+        "first_tick_to_first_correct_ms": 100.402,
+        "replayed_correct_cycles": []
+      }
+    },
+    {
+      "trial": 2,
+      "precommit": {
+        "restored_cycle": 190,
+        "correct": 18,
+        "wrong": 0,
+        "detected": 1,
+        "first_correct_cycle": 190,
+        "first_tick_to_first_correct_ms": 1.785,
+        "fault_cycle": 200,
+        "output_at_fault_cycle": null,
+        "first_correct_after_fault_cycle": 202,
+        "fault_to_first_correct_ms": 199.998,
+        "replayed_correct_cycles": [
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199
+        ]
+      },
+      "postcommit": {
+        "restored_cycle": 201,
+        "correct": 14,
+        "wrong": 0,
+        "detected": 0,
+        "first_correct_cycle": 202,
+        "first_tick_to_first_correct_ms": 100.249,
+        "replayed_correct_cycles": []
+      }
+    }
+  ]
+}

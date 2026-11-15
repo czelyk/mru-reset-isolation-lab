@@ -19,7 +19,7 @@ trap cleanup EXIT
 wait_for_event() {
     local pattern=$1 file=$2
     for ((attempt=0; attempt<700; attempt++)); do
-        if grep -q "$pattern" "$file"; then
+        if [[ -f "$file" ]] && grep -q "$pattern" "$file"; then
             return
         fi
         if ! kill -0 "$pid" 2>/dev/null; then
